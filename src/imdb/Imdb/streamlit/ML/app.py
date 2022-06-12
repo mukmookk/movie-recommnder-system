@@ -180,54 +180,71 @@ def button_action(cond, algorithm, is_job, is_genre, job_list=patch_joblist(), g
 				st.caption(round(float(results[9][1]), 2))
 
 
-st.title('Movie Recommender System')
+st.title('🚀 Movie Recommender System 🚀')
+txt = st.markdown('----')
+txt = st.markdown('### 🌱 Intro')
+img = st.image("https://ifh.cc/g/gHThHG.jpg")
+txt = st.text('movielens data를 기반으로 간단하게 구현된 영화 추천 페이지입니다.') 
+txt = st.text('총 5가지 추천 알고리즘이 적용되었고, 각 알고리즘을 단계로 구분하여 원하는 알고리즘을 입력과 함께 사용할 ')
+txt = st.text('수 있습니다.')
+txt = st.text('알고리즘은 크게 SQL 기반, ML 모델 기반으로 나뉘며, `STEP 1`, `STEP 2`, `STEP 4`의 경우 ')
+txt = st.text('SQL을 기반으로, `STEP 3`, `STEP 5`의 경우 ML을 기반으로 동작합니다.')
+txt = st.markdown('----')
+txt = st.markdown('### 🧐 Resources')
+txt = st.markdown('**Github URL**')
+txt = st.markdown('```https://github.com/mukmookk/movie-recommnder-system```')
+txt = st.markdown('**코드 설명**')
+txt = st.markdown('```https://github.com/mukmookk/movie-recommnder-system```')
 txt = st.markdown('----')
 
-txt = st.subheader('해당 영화 추천 시스템은 총 5가지 Step으로 이뤄져 있답니다.\n\n')
-
-txt = st.markdown('**STEP 1. 직업을 기반으로 Top 10**\n\n')
-txt = st.markdown('**STEP 2. 나이를 기반으로 Top 10**\n\n')
-txt = st.markdown('**STEP 3. 피어슨 계수를 사용하는 KNN 알고리즘을 활용한 추천**\n\n')
-txt = st.markdown('**STEP 4. SQL 쿼리를 활용한 간단한 추천**\n\n')
-txt = st.markdown('**STEP 5. SVD 알고리즘을 활용한 추천**\n')
-txt = st.markdown('----')
+txt = st.subheader('\n')
 
 job_list = patch_joblist()
 genre_list = patch_genrelist()
 
-
-txt = st.markdown('### STEP 1. 직업을 기반으로 Top 10\n\n')
+txt = st.markdown('### 🎨 STEP 1. 직업을 기반으로 Top 10\n\n')
+img = st.image("https://ifh.cc/g/AxCKB4.jpg")
 selected_job = st.selectbox(
     	'직종을 "입력" 혹은 "선택"해주세요\n\n',
     	job_list
 	)
 if st.button('직업 기반 추천 시스템 START!'):
     button_action(selected_job, algo[0], 1, 0)
+txt = st.markdown('----')
 
 
-txt = st.markdown('### STEP 2. 나이를 기반으로 Top 10\n\n')
+txt = st.markdown('### ✨ STEP 2. 나이를 기반으로 Top 10\n\n')
+img = st.image("https://ifh.cc/g/gHThHG.jpg")
 number_age = st.number_input('나이를 입력해주세요 ', min_value=0, format="%d")
 if st.button('나이 기반 추천 시스템 START!'):
     button_action(number_age, algo[1], 0, 0)
+txt = st.markdown('----')
 
 
-txt = st.markdown('### STEP 3. KNN 알고리즘을 활용한 추천\n\n')
+txt = st.markdown('### 🔥 STEP 3. KNN 알고리즘을 활용한 추천\n\n')
+img = st.image("https://ifh.cc/g/oovcwK.jpg")
+
 number_knn = st.number_input('당신의 ID를 입력해주세요  ', min_value=1, format="%d")
 if st.button('KNN 기반 추천 시스템 START!'):
     button_action(number_knn, algo[2], 0, 0)
+txt = st.markdown('----')
 
 
+txt = st.markdown('### 🍻 STEP 4. SQL 쿼리를 활용한 간단한 추천\n\n')
+img = st.image("https://ifh.cc/g/kksqpY.jpg")
 
-txt = st.markdown('### STEP 4. SQL 쿼리를 활용한 간단한 추천\n\n')
 selected_genre = st.selectbox(
     	'장르를 선택해주세요\n\n',
     	genre_list
 	)
 if st.button('쿼리 기반 추천 시스템 START!'):
     button_action(selected_genre, algo[3], 0, 1)
+txt = st.markdown('----')
 
 
-txt = st.markdown('### STEP 5. SVD 알고리즘을 활용한 추천\n\n')
+txt = st.markdown('### 🎉 STEP 5. SVD 알고리즘을 활용한 추천\n\n')
+img = st.image("https://ifh.cc/g/CkpP5r.jpg")
+
 number_svd = st.number_input('당신의 ID를 입력해주세요    ', min_value=1, format="%d")
 if st.button('SVD 기반 추천 시스템 START!'):
     button_action(number_svd, algo[4], 0, 0)

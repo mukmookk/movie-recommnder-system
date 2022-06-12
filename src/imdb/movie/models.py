@@ -25,6 +25,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=1000)
     image = models.ImageField(upload_to='movies')
+    print("\n\n\n", image, "\n\n\n")
     banner=models.ImageField(upload_to='movies')
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=10)
     language = models.CharField(choices=LANGUAGE_CHOICES, max_length=10)

@@ -73,8 +73,6 @@ def svd():
 	## PREDICTING
 	model_filename = "./model_svc.pickle"
 
-	print(patch.itemRating(user= "610", item= "10", model_filename = "./model_svc.pickle"))
-
 	# Than predict ratings for all pairs (u, i) that are NOT in the training set
 	top_n = 10
 	top_pred = patch.get_top_n(predictions, n = top_n)

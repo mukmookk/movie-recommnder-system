@@ -26,7 +26,7 @@ query_2 = """
      WHERE o1.genre = o2.genre
      ORDER BY m_rating DESC LIMIT 10
    )
-   ORDER BY o1.genre, o1.m_rating DESC
+   ORDER BY o1.genre, o1.sr DESC
 """
 
 output = ps.sqldf(query_2)
@@ -40,4 +40,4 @@ def get_top10_movie_genre(genre):
 def top_movies_genre(genre):
     return get_top10_movie_genre(genre)
 
-print(get_top10_movie_genre("Action"))
+#print(get_top10_movie_genre("Action"))

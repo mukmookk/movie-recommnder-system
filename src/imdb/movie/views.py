@@ -17,6 +17,7 @@ class HomeView(ListView):
         context['top_rated'] = Movie.objects.filter(status='TR')
         context['most_watched'] = Movie.objects.filter(status='MW')
         context['recently_added'] = Movie.objects.filter(status='RA')
+        context['no_stat'] = Movie.objects.filter(status='')
         print('protik', context)
         return context
 

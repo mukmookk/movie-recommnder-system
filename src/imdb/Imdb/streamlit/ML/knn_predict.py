@@ -59,9 +59,8 @@ def knn():
 
 	print (">> DONE     It Tooks Total:", (end-start).seconds, "seconds\n\n" )
 
-	#predictions = algo.test(testset)
-	#rmse = accuracy.rmse(predictions)
-	print("rsme\n")
+	predictions = algo.test(testset)
+	rmse = accuracy.rmse(predictions)
 
 	## SAVING TRAINED MODEL
 	model_filename = "./model_knn.pickle"
