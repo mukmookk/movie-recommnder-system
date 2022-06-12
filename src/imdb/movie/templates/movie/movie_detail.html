@@ -1,0 +1,215 @@
+{%extends 'base.html' %}
+{%load static %}
+
+{%block details%}
+
+		<!-- transformers area start -->
+		<section class="transformers-area">
+			<div class="container">
+                
+				<div class="transformers-box">
+					
+					<div>
+						<h3>Triler</h3>
+						<div class="video-area">
+							<img src="{{object.banner.url}}" alt="video" />
+							<a href="{{object.movie_trailer}}" class="popup-youtube">
+								<i class="icofont icofont-ui-play"></i>
+							</a>
+						</div>
+						
+					</div>
+
+					<div class="row flexbox-center">
+						<div class="col-lg-5 text-lg-left text-center">
+							<div class="transformers-content">
+								<img src="{{object.image.url}}" alt="about" />
+							</div>
+						</div>
+						<div class="col-lg-7">
+							<div class="transformers-content">
+								<h2>{{object}}</h2>
+								<p>{{object.category}}</p>
+								<ul>
+									<li>
+										<div class="transformers-left">
+											제목:
+										</div>
+										<div class="transformers-right">
+											<a href="#">{{object.category}}</a>
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											등장 배우:
+										</div>
+										<div class="transformers-right">
+											{{object.cast}}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											감독:
+										</div>
+										<div class="transformers-right">
+											Youngmuk Kim
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											상영 시간: 
+										</div>
+										<div class="transformers-right">
+											190m
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											개봉 일자:
+										</div>
+										<div class="transformers-right">
+											{{object.years_of_production}}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											상영 언어:
+										</div>
+										<div class="transformers-right">
+											{{object.language}}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											조회수
+										</div>
+										<div class="transformers-right">
+											{{object.views_count}}
+										</div>
+									</li>
+									<li>
+										<div class="transformers-left">
+											소셜 미디어:
+										</div>
+										<div class="transformers-right">
+											<a href="#"><i class="icofont icofont-social-facebook"></i></a>
+											<a href="#"><i class="icofont icofont-social-twitter"></i></a>
+											<a href="#"><i class="icofont icofont-social-google-plus"></i></a>
+											<a href="#"><i class="icofont icofont-youtube-play"></i></a>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!-- transformers area end -->
+		<!-- details area start -->
+		<section class="details-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-9">
+						<div class="details-content">
+							<div class="details-overview">
+								<h2>줄거리</h2>
+								<p>{{object.description}}</p>
+							</div>
+							<div class="details-reply">
+								<h2>코멘트를 남겨주세요</h2>
+								<form action="#">
+									<div class="row">
+										<div class="col-lg-4">
+											<div class="select-container">
+												<input type="text" placeholder="이름"/>
+												<i class="icofont icofont-ui-user"></i>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="select-container">
+												<input type="text" placeholder="이메일"/>
+												<i class="icofont icofont-envelope"></i>
+											</div>
+										</div>
+										<div class="col-lg-4">
+											<div class="select-container">
+												<input type="text" placeholder="전화번호"/>
+												<i class="icofont icofont-phone"></i>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="textarea-container">
+												<textarea placeholder="메세지를 남겨주세요"></textarea>
+												<button><i class="icofont icofont-send-mail"></i></button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="details-comment">
+								<a class="theme-btn theme-btn2" href="#">작성 완료</a>
+								<p>본 콘텐츠의 저작권은 저작권자 또는 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적 책임을 질 수 있습니다. 또한 무분별한 스포일러의 경우, 사이트 운영 수칙에 의거하여 불이익이 발생할 수 있습니다.</p>
+							</div>
+							<div class="details-thumb">
+								<div class="details-thumb-prev">
+									<div class="thumb-icon">
+										<i class="icofont icofont-simple-left"></i>
+									</div>
+									<div class="thumb-text">
+										<h4>이전 포스트</h4>
+										<p>보러가기</p>
+									</div>
+								</div>
+								<div class="details-thumb-next">
+									<div class="thumb-text">
+										<h4>다음 포스트</h4>
+										<p>보러가기</p>
+									</div>
+									<div class="thumb-icon">
+										<i class="icofont icofont-simple-right"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section-title pb-20">
+							<h1><i class="icofont icofont-film"></i> 관련 컨텐츠 목록</h1>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-md-12">
+						<div class="video-slider mt-20">
+							{%for movie in related_movies%}
+							<div class="video-area">
+								<img src="{{movie.image.url}}" alt="video" />
+								<a href="{{movie.movie_trailer}}" class="popup-youtube">
+									<i class="icofont icofont-ui-play"></i>
+								</a>
+							</div>
+							{%endfor%}
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+			
+			<!-- <section class="related">
+				<h3>Related Movies</h3>
+				<div class="relatemovie">
+					{%for movie in related_movies%}
+					<a href="#"><img src="{{movie.image.url}}"></a>
+					<a href="#"><span class="relatedname">{{movie.title}}</span></a>
+					{%endfor%}
+				</div>
+			</section> -->
+		</section><!-- details area end -->
+{%endblock details%}
