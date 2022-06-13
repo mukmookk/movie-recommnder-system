@@ -1,5 +1,5 @@
 #!/bash/bash
-mkdir -p ~/.streamlit/
+mkdir -p ~/src/.streamlit/
 
 echo "\
 [server]\n\
