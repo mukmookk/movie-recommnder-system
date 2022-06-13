@@ -1,4 +1,4 @@
-# IMDB_CLONE
+# MOVIE RECOMMENDER
 
 ## 데이터 베이스 2차 과제
   > 12192190 김영묵
