@@ -35,8 +35,9 @@ df_user_rating_movie_2 = pd.merge(df_user_rating_2, patch.df_movie, how='left', 
 
 df_user_rating_movie_2 = df_user_rating_movie_2.groupby(by=['age', 'title'])['rating'].agg(['sum','count']).reset_index()
 
-df_user_rating_movie_2 = df_user_rating_movie_2.sort_values('age', ascending=False)
-
+df_user_rating_movie_2 = df_user_rating_movie_2.sort_values(['age', 'sum'], ascending=False)
+print("df_user_rating_movie_2")
+print(df_user_rating_movie_2.to_csv('./out.csv'))
 df_user_rating_movie_2['mean'] = df_user_rating_movie_2['sum'] / df_user_rating_movie_2['count']
 
 

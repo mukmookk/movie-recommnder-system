@@ -52,24 +52,25 @@ df_user_rating_movie = pd.merge(df_user_rating, patch.df_movie, how='left', left
 
 # group by ['occupation', 'title'] and SELECT sum(rating), count(*)
 # `count(rating)` is considered reason of using `mean`
-df_user_rating_movie = df_user_rating_movie.groupby(by=['occupation', 'movie title'])['rating'].agg(['sum','count'])
+df_user_rating_movie = df_user_rating_movie.groupby(by=['occupation', 'title'])['rating'].agg(['sum','count']).sort_values(['occupation', 'sum'], ascending=False)
 
 # get top 10 movies based on `sum`
-df_user_rating_movie = df_user_rating_movie.nlargest(10, "sum")
+df_user_rating_movie = df_user_rating_movie.groupby(by=['occupation', 'title']).first(10)
 
 # add attribute `mean` using attribute `sum` / `count`
 # BUT NOT USED, there was a problem
 df_user_rating_movie['mean'] = df_user_rating_movie['sum'] / df_user_rating_movie['count']
 ```
 
-`user`, `rating`, `movie` 테이블을 먼저 Join 해주었습니다. 이후 Group by 연산을 통해 직업별로 rating을 집계해주었고 다음의 SQL을 의도하였습니다.
+`user`, `rating`, `movie` 테이블을 먼저 Join 해주었습니다. 이후 Group by 연산을 통해 직업별로 rating을 집계해주었고, 'occupation', 'sum'을 기반으로 정렬하였습니다.
+
+다음의 SQL을 의도하였습니다.
 ```
 SELECT SUM(rating) as sum, COUNT(*) as count
 ...
 GROUP BY 'occupation', 'movie title'
+ORDER BY 'occupation', 'sum'
 ```
-이후 `nlargest`를 통해 `sum`을 기반으로 각 그룹 별로 가장 많은 평점 합을 가진 순으로 정렬하였습니다.
-
 추가적으로 `sum / count`를 통해 `mean`을 계산해봤습니다만, 평점 데이터가 충분히 확보되지 않은 상태에서 단 하나의 5점의 평점을 가진 영화가 수십의 평점 정보를 가진 영화보다 우선적으로 추천되어야 한다는 것이 논리적으로 납득이 되지 않았습니다.
 
 ### **나이 기반 추천 시스템 (SQL)**
@@ -94,24 +95,24 @@ df_user_rating_movie_2 = pd.merge(df_user_rating_2, patch.df_movie, how='left', 
 
 # group by ['age', 'title'] and SELECT sum(rating), count(*)
 # `count(rating)` is considered reason of using `mean`
-df_user_rating_movie_2 = df_user_rating_movie_2.groupby(by=['age', 'title'])['rating'].agg(['sum','count'])
+df_user_rating_movie_2 = df_user_rating_movie_2.groupby(by=['age', 'title'])['rating'].agg(['sum','count']).reset_index()
 
-# get top 10 movies based on `sum`
-df_user_rating_movie_2 = df_user_rating_movie_2.nlargest(10, "sum")
+# get top 10 movies based on `age`, `sum`
+df_user_rating_movie_2 = df_user_rating_movie_2.sort_values(['age', 'sum'], ascending=False)
 
 # add attribute `mean` using attribute `sum` / `count`
 # BUT NOT USED, there was a problem
 df_user_rating_movie_2['mean'] = df_user_rating_movie_2['sum'] / df_user_rating_movie_2['count']
 ```
-먼저, 나이를 처리함에 있어, `convert_age(age)` 함수를 활용 10대 20대 30대 등으로 추상화를 먼저 진행하였습니다.
+먼저, 나이를 처리함에 있어, `convert_age(age)` 함수를 활용 `10대 20대 30대...` 등으로 나이에 대한 추상화를 먼저 진행하였습니다.
 
-이후 `user`, `rating`, `movie` 테이블을 Join 해주었습니다. 이후 Group by 연산을 통해 나이 별로 rating을 집계해주었고 다음의 SQL을 의도하였습니다.
+이후 `user`, `rating`, `movie` 테이블을 Join 해주었습니다. 이후 Group by 연산을 통해 나이 별로 rating을 집계해주었고, 정렬을 진행하였습니다. 최종적으로 다음의 SQL을 의도하였습니다.
 ```
 SELECT SUM(rating) as sum, COUNT(*) as count
 ...
 GROUP BY 'age', 'movie title'
+ORDER BY 'age', 'sum'
 ```
-이후 `nlargest`를 통해 `sum`을 기반으로 각 그룹 별로 가장 많은 평점 합을 가진 순으로 정렬하였습니다.
 
 직업 기반 추천과 마찬가지로  `sum / count`를 통해 `mean`을 계산해봤습니다만, 평점 데이터가 충분히 확보되지 않은 상태에서 평점 정보가 하나밖에 없는 영화가 5점을 받아, 평점 평균이 4.xx가 나오되 수많은 평점 정보가 있는 영화보다 우선 순위에 있다는 것이 납득이 가지 않았습니다.
 
@@ -140,7 +141,7 @@ KNN 알고리즘을 구현한 코드의 경우, 코드의 길이가 길어 일�
 
 앞서 언급하였다싶이, `surprise` 패키지를 활용하였고, 이는 `surprise`가 추천 시스템, 그 중에서도 해당 과제의 목표인 영화 추천 시스템 개발에 직접적으로 연관 관계를 가지고 있다고 판단하였기 때문입니다.
 
-`sim_options`는 ML의 `하이퍼파라미터`를 의미합니다. 제약 사항인 `pearson coefficient` 를 사용하는 것이나, `k=40`을 제외하고는 모두 `Grindsearchcv`를 활용하여 하이퍼파라미터 튜닝 과정을 거쳤습니다.
+`sim_options`는 `surprise`에서 모델의 `하이퍼파라미터`를 지정하는 양식입니다. 제약 사항인 `similiarity measure`로 `pearson coefficient` 를 활용하는 것이나, `k=40`을 제외하고는 모두 `Grindsearchcv`를 활용하여 하이퍼파라미터 튜닝 과정을 거쳤습니다.
 
 `rmse` 값을 지표로 사용하였습니다. 작성하는 현재 `0.9324`라는 값을 얻었습니다.
 
