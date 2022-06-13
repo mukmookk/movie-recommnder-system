@@ -40,4 +40,3 @@ df_user_rating_movie_2 = df_user_rating_movie_2.sort_values('age', ascending=Fal
 df_user_rating_movie_2['mean'] = df_user_rating_movie_2['sum'] / df_user_rating_movie_2['count']
 
 
-
