@@ -18,7 +18,7 @@ https://github.com/mukmookk/movie-recommnder-system
 또한 URL을 통해 배포가 된 형태로도 확인하실 수 있습니다.
 
 **Demo**
-https://youngmuk-recommender-db2022.herokuapp.com/
+https://youngmuk-movie-recommender.herokuapp.com
 
 ## 코드 설명
 
@@ -247,4 +247,5 @@ def svd_get_top_10(model_filename, dataset, uid):
 
 그래도 아쉬운 마음에 `streamlit`이라는 패키지를 간단하게 설명하면, 데이터를 활용하여 간단한 웹페이지를 구성할 수 있는 패키지입니다. 사용하는게 간편하고 별도의 웹 기술 스택없이 파이썬 만으로 프론트엔드 데이터를 표현할 수 있다는 점이 장점입니다.
 
-이상입니다. 과제가 재밌어서 시간이 너무 부족했습니다. 감사합니다~
+----
+FIN

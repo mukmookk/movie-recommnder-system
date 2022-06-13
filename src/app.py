@@ -192,9 +192,9 @@ txt = st.text('SQL을 기반으로, `STEP 3`, `STEP 5`의 경우 ML을 기반으
 txt = st.markdown('----')
 txt = st.markdown('### 🧐 Resources')
 txt = st.markdown('**Github URL**')
-txt = st.markdown('```https://github.com/mukmookk/movie-recommnder-system```')
+txt = st.markdown('```https://github.com/mukmookk/movie-recommnder-system/tree/master/src```')
 txt = st.markdown('**코드 설명**')
-txt = st.markdown('```https://github.com/mukmookk/movie-recommnder-system```')
+txt = st.markdown('```github.com/mukmookk/movie-recommnder-system/blob/master/src/README.md```')
 txt = st.markdown('----')
 
 txt = st.subheader('\n')
