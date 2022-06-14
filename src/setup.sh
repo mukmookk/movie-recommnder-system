@@ -17,7 +17,7 @@ backgroundColor=\"#282a36\"\n\
 secondaryBackgroundColor=\"#44475a\"\n\
 textColor=\"#f8f8f2\"\n\
 \n\
-" >> ~/.streamlit/config.toml
+" > ~/.streamlit/config.toml
 
 echo "> execution completed\n\n"
 

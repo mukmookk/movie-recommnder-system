@@ -1,12 +1,9 @@
 # MOVIE RECOMMENDER
 
-## 데이터 베이스 2차 과제
-  > 12192190 김영묵
-
-`Streamlit`과 `Surprise`를 이용한 간단한 Movie Recommdner 시스템입니다.
+> `Streamlit`과 `Surprise`를 이용한 간단한 Movie Recommdner 시스템입니다.
 
 ### Intro
-해당 과제의 경우, 당초 django와 mysql로 진행을 구상하였으나, 기술적인 한계와 마감 기한의 한계로 인해 제한된 시간 상 구현이 가능한 방식으로 기술 스택을 Front는 Streamlit을 통해, ML은 Surprise를 통해, 이 외의 간단한 쿼리 등은 pandas 모듈을 사용하여 진행되었습니다.
+해당 과제의 경우, 당초 `django`와 `mysql`로 진행을 구상하였으나, 기술적인 한계와 마감 기한의 한계로 인해 제한된 시간 상 구현이 가능한 방식으로 기술 스택을 Front는 `Streamlit`을 통해, ML은 `Surprise`를 통해, 이 외의 간단한 쿼리 등은 `pandas` 패키지을 사용하여 진행되었습니다.
 
 영화 이미지의 경우 크롤링을 통해 해당 영화의 이미지를 가져왔습니다. `beautifulsoap`라는 패키지를 활용하였습니다. `poster_crawl.py`라는 파일이 이에 해당합니다.
 

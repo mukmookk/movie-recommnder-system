@@ -8,9 +8,11 @@ from datetime import datetime
 from surprise import Reader
 from surprise import Dataset
 from surprise import SVD
-from surprise import accuracy
+from surprise import accuracy, similarities
 from surprise import dump
 from surprise.model_selection import train_test_split
+from surprise.model_selection import cross_validate
+
 
 import difflib
 import random
@@ -18,9 +20,11 @@ import random
 def svd():
 	reader = Reader(rating_scale=(0, 5))
 	df_user_filtered = patch.df_user
-
+	
+	print(df_user_filtered)
+	print(patch.df_rating)
 	df_user_rating = pd.merge(df_user_filtered, patch.df_rating, how='left', left_on='userId', right_on='userId')
-	df_user_rating.drop(['zip code', 'ratingId', 'userId'], axis=1, inplace=True)
+	df_user_rating.drop(['zip code', 'ratingId', 'gender'], axis=1, inplace=True)
 							
 	data = Dataset.load_from_df(df_user_rating[['userId', 'movieId','rating']], reader)
 
@@ -55,7 +59,6 @@ def svd():
 	print("> Training...")
 
 	algo = SVD(n_epochs = 20, lr_all = 0.005, reg_all = 0.02)
-
 	algo.fit(trainset)
 
 	endTraining = datetime.now()
@@ -66,17 +69,17 @@ def svd():
 	print (">> DONE     It Tooks Total:", (end-start).seconds, "seconds" )
 
 	predictions = algo.test(testset)
-	accuracy.rmse(predictions)
+	#print(cross_validate(algo, data))
+	#print("\n\n\n")
 
-	patch.save_model("./model_svc.pickle", algo)
+	patch.save_model("./model_svd.pickle", algo)
 
 	## PREDICTING
-	model_filename = "./model_svc.pickle"
+	model_filename = "./model_svd.pickle"
 
 	# Than predict ratings for all pairs (u, i) that are NOT in the training set
 	top_n = 10
 	top_pred = patch.get_top_n(predictions, n = top_n)
-
 	# User raw Id
 	uid_list = [150]
 	recomm_list = []
@@ -88,7 +91,6 @@ def svd():
 				print('Movie:', iid, '-', movie, ', rating:', str(rating))
 				recomm_list.append([movie.to_string().split('    ')[1], str(rating)])
 				
-	print(recomm_list)
  
 def svd_get_top_10(model_filename, dataset, uid):
 	load_model = patch.load_model(model_filename)
@@ -109,3 +111,5 @@ def svd_get_top_10(model_filename, dataset, uid):
 				#print('Movie:', iid, '-', movie, ', rating:', str(rating))
 				recomm_list.append([movie.to_string().split('    ')[1], str(rating)])
 	return recomm_list
+
+#svd()

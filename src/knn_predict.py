@@ -11,6 +11,7 @@ from surprise import KNNBaseline
 from surprise import accuracy
 from surprise import dump
 from surprise.model_selection import train_test_split
+from surprise.model_selection import cross_validate
 
 import difflib
 import random
@@ -36,7 +37,7 @@ def knn():
 
 	sim_options = {
 		'name': 'pearson',
-		'user_based': True,
+		'user_based': True, # compute  similarities between users
 		'min_support': 10
 	}
 	trainset, testset = prep[0], prep[1] 
@@ -61,6 +62,9 @@ def knn():
 
 	predictions = algo.test(testset)
 	rmse = accuracy.rmse(predictions)
+	print("Cross validate:")
+	print(cross_validate(algo, prep[2], ['RMSE', 'MAE', "test_mae"], cv=5, verbose=True))
+	print(cross_validate(algo, prep[2])["test_mae"].mean())
 
 	## SAVING TRAINED MODEL
 	model_filename = "./model_knn.pickle"
@@ -90,3 +94,4 @@ def knn_get_top_10(model_filename, dataset, uid):
 	return recomm_list
 
 preprocessing()
+knn()
