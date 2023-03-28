@@ -3,21 +3,10 @@
 > `Streamlit`과 `Surprise`를 이용한 간단한 Movie Recommdner 시스템입니다.
 
 ### Intro
-해당 과제의 경우, 당초 `django`와 `mysql`로 진행을 구상하였으나, 기술적인 한계와 마감 기한의 한계로 인해 제한된 시간 상 구현이 가능한 방식으로 기술 스택을 Front는 `Streamlit`을 통해, ML은 `Surprise`를 통해, 이 외의 간단한 쿼리 등은 `pandas` 패키지을 사용하여 진행되었습니다.
 
 영화 이미지의 경우 크롤링을 통해 해당 영화의 이미지를 가져왔습니다. `beautifulsoap`라는 패키지를 활용하였습니다. `poster_crawl.py`라는 파일이 이에 해당합니다.
 
-해당 프로젝트의 압축 파일을 첨부함과 동시에 깃 링크를 첨부하고자 합니다.
-
-**Git repository**
-https://github.com/mukmookk/movie-recommnder-system
-
-또한 URL을 통해 배포가 된 형태로도 확인하실 수 있습니다.
-
-**Demo**
-https://youngmuk-movie-recommender.herokuapp.com
-
-## 코드 설명
+## Summary
 
 ----
 **코드는 크게 총 2가지 파트로 나뉩니다.**
@@ -240,10 +229,3 @@ def svd_get_top_10(model_filename, dataset, uid):
 	return recomm_list
 ```
 해당 함수를 통해, 유저의 `id`가 들어오면, 모델을 로드해서 적절한 형태로 뿌려주는 식으로 처리하였습니다.
-
-추가적으로 `streamlit`이라는 패키지를 활용한 파일인 `app.py`에 대해서도 간략하게 소개하고 싶었으나, 해당 과제의 목표 자체가 웹 프로그래밍이 아닌, 데이터베이스 수업이기에 데이터에 관련된 코드만 설명하고자 합니다.
-
-그래도 아쉬운 마음에 `streamlit`이라는 패키지를 간단하게 설명하면, 데이터를 활용하여 간단한 웹페이지를 구성할 수 있는 패키지입니다. 사용하는게 간편하고 별도의 웹 기술 스택없이 파이썬 만으로 프론트엔드 데이터를 표현할 수 있다는 점이 장점입니다.
-
-----
-FIN
